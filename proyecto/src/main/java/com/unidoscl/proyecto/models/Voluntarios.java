@@ -15,6 +15,7 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -76,6 +77,6 @@ public class Voluntarios {
 		this.updatedAt = new Date();
 	}
 
-	@OneToMany(mappedBy = "usuarioModel", fetch = FetchType.LAZY)
-    private List<Voluntarios> ideas;
+	@OneToMany(mappedBy = "voluntarios", fetch = FetchType.LAZY)
+    private List<Voluntariado> voluntariado;
 }

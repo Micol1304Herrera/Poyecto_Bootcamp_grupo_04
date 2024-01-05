@@ -9,12 +9,15 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -58,6 +61,8 @@ public class Voluntariado {
 	@NotEmpty(message = "")
 	private String objetivo;
 
+	// @Past @Future
+	@Future
 	@NotEmpty(message="")
 	private Date duracion;
 
@@ -94,7 +99,8 @@ public class Voluntariado {
 		this.updatedAt = new Date();
 	}
 
-	@OneToMany(mappedBy = "usuarioModel", fetch = FetchType.LAZY)
-    private List<Voluntarios> ideas;
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="voluntario_id")
+	private Voluntarios voluntarios;
 
 }
