@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.unidoscl.proyecto.models.Voluntariado;
 
 @Repository
-public interface EmpresasRepo extends CrudRepository<Voluntariado, Long> {
+public interface OrganizacionRepo extends CrudRepository<Voluntariado, Long> {
 
 }

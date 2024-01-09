@@ -1,5 +1,5 @@
 package com.unidoscl.proyecto.services;
 
-public class EmpresasService {
+public class OrganizacionService {
     
 }

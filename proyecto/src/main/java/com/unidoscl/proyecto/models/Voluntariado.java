@@ -1,22 +1,15 @@
 package com.unidoscl.proyecto.models;
 
 import java.util.Date;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -42,48 +35,35 @@ public class Voluntariado {
 	@Size(min = 3, max = 30, message = "Ingresa un username de al menos 3 caracteres")
 	private String nameVoluntariado;
 
-	@NotEmpty(message = "")
+	@NotEmpty(message = "Selecciona un campo")
 	private String region;
 
-	@NotEmpty(message = "")
+	@NotEmpty(message = "Selecciona un campo")
 	private String comuna;
 
-	@NotEmpty(message="")
+	@NotEmpty(message= "La direccion es obligatoria")
+	private String direccion;
+
+	@NotEmpty(message="Ingresa el numero de voluntarios que se requerirá")
 	@Min(1)
 	private int nVoluntarios;
 
-	@NotEmpty(message = "")
+	@NotEmpty(message = "Selecciona un campo")
 	private String sector;
 
-	@NotEmpty(message = "")
+	@NotEmpty(message = "El nombre de la organizacion es requerido")
 	private String organizacion;
 
-	@NotEmpty(message = "")
+	@NotEmpty(message = "Ingresa el objetivo del voluntariado (Qué cambio quieren lograr)")
 	private String objetivo;
 
-	// @Past @Future
+	//@Future
 	@Future
-	@NotEmpty(message="")
+	@NotEmpty(message="El campo es obligatorio")
 	private Date duracion;
 
-	@NotEmpty(message="")
+	@NotEmpty(message="Ingresa un numero de telefono")
 	private String numero;
-
-	@NotEmpty(message="")
-	private String rutEmpresa;
-
-	@NotEmpty(message = "Correo electrónico es requerido!")
-	@Email(message = "Ingresa un email valido")
-	private String email;
-
-	@NotEmpty(message = "Password es requerido")
-	@Size(min = 8, max = 128, message = "Password debe contener al menos 8 caracteres")
-	private String password;
-
-	@Transient
-	@NotEmpty(message = "Password es requerido")
-	@Size(min = 8, max = 128, message = "Password debe contener al menos 8 caracteres")
-	private String passwordConfirm;
 
 	@Column(updatable = false)
 	private Date createdAt;
@@ -98,9 +78,5 @@ public class Voluntariado {
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="voluntario_id")
-	private Voluntarios voluntarios;
 
 }
