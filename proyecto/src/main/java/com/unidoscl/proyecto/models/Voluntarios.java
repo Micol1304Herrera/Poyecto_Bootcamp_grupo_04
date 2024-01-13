@@ -1,12 +1,17 @@
 package com.unidoscl.proyecto.models;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -46,9 +51,13 @@ public class Voluntarios {
 	@NotEmpty(message = "")
 	private String comuna;
 
-	@NotEmpty(message="")
-	@Min(15)
+	@NotEmpty(message="Este campo es requerido")
+	@Min(16)
 	private int edad;
+
+	@NotEmpty(message = "El correo electrónico es requerido!")
+	@Email(message = "Ingresa un email valido")
+	private String email;
 
 	@NotEmpty(message = "Password es requerido")
 	@Size(min = 8, max = 128, message = "Password debe contener al menos 8 caracteres")
@@ -72,5 +81,14 @@ public class Voluntarios {
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
+
+	// Relacion hacia Voluntariado
+	@OneToMany(mappedBy = "voluntario", fetch = FetchType.LAZY)
+    private List<Voluntariado> voluntariado;
+
+	// Relacion hacia regiones
+	@OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="region_id")
+    private Regiones regiones;
 
 }

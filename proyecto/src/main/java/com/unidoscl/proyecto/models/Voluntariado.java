@@ -4,9 +4,13 @@ import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -57,7 +61,6 @@ public class Voluntariado {
 	@NotEmpty(message = "Ingresa el objetivo del voluntariado (Qué cambio quieren lograr)")
 	private String objetivo;
 
-	//@Future
 	@Future
 	@NotEmpty(message="El campo es obligatorio")
 	private Date duracion;
@@ -78,5 +81,23 @@ public class Voluntariado {
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
+
+
+	// RELACIONES
+
+	// Relacion hacia voluntarios
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="voluntario_id")
+	private Voluntarios voluntario;
+
+	// Relacion hacia organizacion
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="organizacion_id")
+	private Organizacion orgAgregadora;
+
+	// Relacion hacia regiones
+	@OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="region_id")
+    private Regiones regiones;
 
 }

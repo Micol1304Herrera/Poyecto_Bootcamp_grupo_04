@@ -1,5 +1,10 @@
 package com.unidoscl.proyecto.repositories;
 
-public class VoluntariadosRepo {
-    
+import org.springframework.data.repository.CrudRepository;
+
+import com.unidoscl.proyecto.models.Voluntariado;
+
+public interface VoluntariadosRepo extends CrudRepository<Voluntariado, Long> {
+
+    Voluntariado findByNameVoluntariado(String nVoluntariado);
 }

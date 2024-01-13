@@ -1,12 +1,15 @@
 package com.unidoscl.proyecto.models;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -39,7 +42,7 @@ public class Organizacion {
 
     @NotEmpty(message = "El correo electrónico es requerido!")
 	@Email(message = "Ingresa un email valido")
-	private String emailOrg;
+	private String email;
 
     @NotEmpty(message = "Password es requerido")
 	@Size(min = 8, max = 128, message = "Password debe contener al menos 8 caracteres")
@@ -63,5 +66,10 @@ public class Organizacion {
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
+
+
+	// Relacion hacia Voluntariado
+	@OneToMany(mappedBy = "organizacion", fetch = FetchType.LAZY)
+    private List<Voluntariado> orgAgregadora;
 
 }
