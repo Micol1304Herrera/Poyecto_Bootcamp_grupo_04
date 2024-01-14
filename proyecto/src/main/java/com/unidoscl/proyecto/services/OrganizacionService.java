@@ -3,25 +3,28 @@ package com.unidoscl.proyecto.services;
 import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import com.unidoscl.proyecto.models.Organizacion;
 import com.unidoscl.proyecto.repositories.OrganizacionRepo;
 
+@Service
 public class OrganizacionService {
 
     //INYECCION DE DEPENDENCIAS
-	private final OrganizacionRepo oRepo;
+	private final OrganizacionRepo orgRepo;
+
 	public OrganizacionService(OrganizacionRepo oRepo) {
-		this.oRepo = oRepo;
+		this.orgRepo = oRepo;
 	}
 
 	public Organizacion encontrarPorEmail(String email) {
-		return oRepo.findByEmail(email);
+		return orgRepo.findByEmail(email);
 	}
 
 	public Organizacion encontrarPorId(Long id) {
-		Optional<Organizacion> org = oRepo.findById(id);
+		Optional<Organizacion> org = orgRepo.findById(id);
 		if(org.isPresent()) {
 			return org.get();
 		}
@@ -30,7 +33,7 @@ public class OrganizacionService {
 
 	//Registrar organizacion
 	public Organizacion registrarOrg(Organizacion org, BindingResult resultado) {
-        Organizacion orgRegistrar = oRepo.findByEmail(org.getEmail());
+        Organizacion orgRegistrar = orgRepo.findByEmail(org.getEmail());
 
         if(orgRegistrar != null) {
             resultado.rejectValue("email", "Matches", "Email already exists");
@@ -43,12 +46,12 @@ public class OrganizacionService {
         }
         String hashed = BCrypt.hashpw(org.getPassword(), BCrypt.gensalt());
         org.setPassword(hashed);
-        return oRepo.save(org);
+        return orgRepo.save(org);
     }
 
 	// Autenticacion de la organizacion
 	public boolean autenticacionOrg(String email, String password, BindingResult resultado) {
-		Organizacion orgRegistrar = oRepo.findByEmail(email);
+		Organizacion orgRegistrar = orgRepo.findByEmail(email);
 
 		if(orgRegistrar == null) {
 			resultado.rejectValue("email", "Matches", "Invalid email");

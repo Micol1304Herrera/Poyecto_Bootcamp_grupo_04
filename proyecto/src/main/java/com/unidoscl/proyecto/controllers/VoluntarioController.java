@@ -22,21 +22,21 @@ public class VoluntarioController {
         this.voluntariosService = voluntariosService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/voluntario")
     public String index(Model modelo) {
         modelo.addAttribute("registro", new Voluntarios());
         modelo.addAttribute("login", new LoginVoluntario());
 
-        return "index.jsp";
+        return "formvoluntario.jsp";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/registerVoluntario")
     public String registro(@Valid @ModelAttribute("registro") Voluntarios newVoluntario,
             BindingResult resultado, Model modelo, HttpSession sesion) {
 
         if (resultado.hasErrors()) {
             modelo.addAttribute("login", new LoginVoluntario());
-            return "index.jsp";
+            return "formvoluntario.jsp";
 
         }
         Voluntarios registrarVoluntario = voluntariosService.registrarVoluntario(newVoluntario, resultado);
@@ -45,34 +45,34 @@ public class VoluntarioController {
             modelo.addAttribute("login", new LoginVoluntario());
             modelo.addAttribute("registro", new Voluntarios());
             modelo.addAttribute("registroExitoso", true);
-            return "index.jsp";
+            return "formvoluntario.jsp";
         } else {
             modelo.addAttribute("login", new LoginVoluntario());
-            return "index.jsp";
+            return "formvoluntario.jsp";
         }
     }
 
-    @PostMapping("/login")
+    @PostMapping("/loginVoluntario")
     public String login(@Valid @ModelAttribute("login") LoginVoluntario loginvoluntario,
             BindingResult resultado, Model modelo, HttpSession sesion) {
 
         if (resultado.hasErrors()) {
             modelo.addAttribute("registro", new Voluntarios());
-            return "index.jsp";
+            return "formvoluntario.jsp";
 
         }
         if (voluntariosService.autenticacionVoluntario(loginvoluntario.getEmail(), loginvoluntario.getPassword(), resultado)) {
             Voluntarios usuarioLog = voluntariosService.encontrarPorEmail(loginvoluntario.getEmail());
             sesion.setAttribute("userID", usuarioLog.getId());
-            return "redirect:/show";
+            return "redirect:/perfilvoluntario";
         } else {
             modelo.addAttribute("registro", new Voluntarios());
-            return "index.jsp";
+            return "formvoluntario.jsp";
         }
 
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/logoutVoluntario")
     public String logout(HttpSession sesion) {
         sesion.invalidate();
         return "redirect:/";

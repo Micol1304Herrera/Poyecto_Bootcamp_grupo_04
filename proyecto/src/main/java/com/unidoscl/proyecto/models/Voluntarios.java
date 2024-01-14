@@ -86,9 +86,11 @@ public class Voluntarios {
 	@OneToMany(mappedBy = "voluntario", fetch = FetchType.LAZY)
     private List<Voluntariado> voluntariado;
 
-	// Relacion hacia regiones
-	@OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="region_id")
-    private Regiones regiones;
+
+	// Relacion hacia voluntarios
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id")
+    private Regiones regiones; // Cambié el nombre de la variable para que sea plural
+
 
 }

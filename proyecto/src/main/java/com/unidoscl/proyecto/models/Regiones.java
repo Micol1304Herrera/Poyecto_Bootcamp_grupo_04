@@ -1,18 +1,23 @@
 package com.unidoscl.proyecto.models;
 
-import java.util.List;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Table(name="regiones")
 @Entity
 public class Regiones {
@@ -24,16 +29,12 @@ public class Regiones {
     @NotNull
     private String regionName;
 
-    // Relacion hacia comunas
-    @OneToMany(mappedBy = "regiones", cascade = CascadeType.ALL)
-    private List<Comunas> comunas;
-
     // Relacion hacia voluntariados
-    @OneToOne(mappedBy="voluntario", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @OneToOne(mappedBy="regiones", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     private Voluntariado voluntariado;
 
     // Relacion hacia voluntarios
-    @OneToOne(mappedBy="regiones", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    private Voluntarios voluntarios;
+    @OneToOne(mappedBy = "regiones", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Voluntarios voluntario; // Cambié el nombre de la variable para que sea singular
 
 }

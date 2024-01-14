@@ -3,17 +3,19 @@ package com.unidoscl.proyecto.services;
 import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import com.unidoscl.proyecto.models.Voluntarios;
 import com.unidoscl.proyecto.repositories.VoluntariosRepo;
 
+@Service
 public class VoluntariosService {
 
     //INYECCION DE DEPENDENCIAS
 	private final VoluntariosRepo voluntariosRepo;
-	public VoluntariosService(VoluntariosRepo voluntariosRepo) {
-		this.voluntariosRepo = voluntariosRepo;
+	public VoluntariosService(VoluntariosRepo vRepo) {
+		this.voluntariosRepo = vRepo;
 	}
 
 	public Voluntarios encontrarPorEmail(String email) {
