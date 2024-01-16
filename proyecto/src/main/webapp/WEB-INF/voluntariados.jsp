@@ -94,13 +94,10 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul id="barra" class="nav navbar-nav">
-        <li class="active"><a href="">Inicio </a></li>
-        <li><a href="#">Foro</a></li>
-        <li><a href="#">Comunidad</a></li>
-        <li><a href="#">Cotacto</a></li>
+        
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href="./perfilvoluntarios.jsp"><span class="glyphicon glyphicon-log-in"></span> Volver</a></li>
       </ul>
     </div>
   </div>
