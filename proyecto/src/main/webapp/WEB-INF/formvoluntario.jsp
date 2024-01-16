@@ -1,24 +1,71 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ page isErrorPage="true" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
 	<style>
+		  footer {
+            background-color: rgb(11, 59, 11);; 
+            color: white; 
+            padding: 10px; 
+        }
         .custom-btn {
             background-color: rgb(11, 59, 11);
             color: white;
         }
+		.navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+      background-color: white;
+      font-size: x-large;
+      padding-left: 30px;
+     }
+	 .icono-correo {
+	width: 20px; 
+    height: 20px; 
+    margin-right: 5px; 
+	 }
+	 .icono-contra {
+	width: 20px; 
+    height: 20px; 
+    margin-right: 5px; 
+	 }
+	 .fondo-verde {
+		background-color: rgb(11, 59, 11);
+	 }
+	 .texto-blanco {
+    color: white; 
+}
     </style>
     <title>UNIDOSCL</title>
 </head>
-<body class="container">
+<body>
+	<nav class="navbar navbar " >
+		<div class="container-fluid">
+		  <div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>                        
+			</button>
+			<img id="diseñologo" src="./img/Diseño sin título.png" height="40px"  alt="">
+			
+		  </div>
+		  <div class="collapse navbar-collapse" id="myNavbar">
+			<ul id="barra" class="nav navbar-nav">
+			  <li class="active"><a href="#">Inicio </a></li>
+			  <li><a href="#">Comunidad</a></li>
+			  <li><a href="#">Cotactanos</a></li>
+			  <li><a href="#">Servicios</a></li>
+			  <li><a href="#">Sobre nosotros</a></li>
+			</ul>
+			
+		  </div>
+		</div>
+	  </nav>
     <div class="container">
 		<div class="row">
 			<!-- Sección de Registro -->
@@ -53,69 +100,26 @@
                             </div>
                         </div>
 						<div>
-							<form:label path="region" class="col-sm-3 col-form-label text-left">Región:</form:label>
-							<div class="col-sm-9">
-								<form:errors class="text-danger" path="region" />
-								<form:select path="region" class="form-control" id="region" onchange="cargarComunas()">
-									<form:option value="" label="Selecciona una región" />
-									<form:option value="region1" label="Región de Arica y Parinacota" />
-									<form:option value="region2" label="Región de Tarapacá" />
-									<form:option value="region3" label="Región de Antofagasta" />
-									<form:option value="region4" label="Región de Atacamá" />
-									<form:option value="region5" label="Región de Coquimbo" />
-									<form:option value="region6" label="Región de Valparaíso" />
-									<form:option value="region7" label="Región Metropolitana de Santiago" />
-									<form:option value="region8" label="Región de O'Higgins" />
-									<form:option value="region9" label="Región del Maule" />
-									<form:option value="region10" label="Región de Ñuble" />
-									<form:option value="region11" label="Región del Biobío" />
-									<form:option value="region12" label="Región de La Araucanía" />
-									<form:option value="region13" label="Región de Los Ríos" />
-									<form:option value="region14" label="Región de Los Lagos" />
-									<form:option value="region15" label="Región de Aysén" />
-									<form:option value="region16" label="Región de Magallanes" />
-								</form:select>
-							</div>
-						</div>
+							<div class="mb-3 row">
+
+								<form:label path="region" for="region"
+									class="col-sm-3 col-form-label text-left">Region:</form:label>
+								<div class="col-sm-9">
+									<form:errors class="text-danger" path="name"/>
+									<form:input path="region" type="text" class="form-control"
+										id="region"/>
+								</div>
+
 						
-						<div>
-							<form:label path="comuna" class="col-sm-3 col-form-label text-left">Comuna:</form:label>
-							<div class="col-sm-9">
-								<form:errors class="text-danger" path="comuna" />
-								<form:select path="comuna" class="form-control" id="comuna">
-									<form:option value="" label="Selecciona una comuna" />
-									<form:option value="comuna1" label="Santiago" />
-									<form:option value="comuna2" label="Providencia" />
-									<form:option value="comuna3" label="Las Condes" />
-									<form:option value="comuna4" label="Valparaíso" />
-									<form:option value="comuna5" label="Viña del Mar" />
-									<form:option value="comuna6" label="Quilpué" />
-									<form:option value="comuna7" label="Concepción" />
-									<form:option value="comuna8" label="Talcahuano" />
-									<form:option value="comuna9" label="Coronel" />
-									<form:option value="comuna10" label="La Serena" />
-									<form:option value="comuna11" label="Coquimbo" />
-									<form:option value="comuna12" label="Antofagasta" />
-									<form:option value="comuna13" label="Calama" />
-									<form:option value="comuna14" label="Iquique" />
-									<form:option value="comuna15" label="Alto Hospicio" />
-									<form:option value="comuna16" label="Puerto Montt" />
-									<form:option value="comuna17" label="Castro" />
-                                    <form:option value="comuna18" label="Castro" />
-                                    <form:option value="comuna19" label="Temuco" />
-                                    <form:option value="comuna20" label="Angol" />
-                                    <form:option value="comuna21" label="Rancagua" />
-                                    <form:option value="comuna22" label="San Fernando" />
-                                    <form:option value="comuna23" label="Arica" />
-                                    <form:option value="comuna24" label="Putre" />
-                                    <form:option value="comuna25" label="Copiapó" />
-                                    <form:option value="comuna26" label="Vallenar" />
-                                    <form:option value="comuna27" label="Chillán" />
-                                    <form:option value="comuna28" label="Bulnes" />
-                                    <form:option value="comuna29" label="Punta Arenas" />
-                                    <form:option value="comuna30" label="Puerto Natales" />
-								</form:select>
-							</div>
+								<div class="mb-3 row">
+
+									<form:label path="comuna" for="comuna"
+										class="col-sm-3 col-form-label text-left">Comuna:</form:label>
+									<div class="col-sm-9">
+										<form:errors class="text-danger" path="comuna"/>
+										<form:input path="comuna" type="text" class="form-control"
+											id="comuna"/>
+									</div>
 						</div>
 						<div>
                             <form:label path="edad" for="edad"
@@ -153,11 +157,6 @@
 							<form:errors class="text-danger" path="passwordConfirmation" />
 							<form:input path="passwordConfirmation" type="password"
 								class="form-control" id="passwordConfirmation" />
-						</div>
-					</div>
-					<div class="d-flex justify-content-end">
-						<button type="submit" class="btn btn-primary">Register</button>
-					</div>
 
 
 					<c:if test="${registroExitoso}">
@@ -184,22 +183,23 @@
 				<form:form action="/loginVoluntario" method="post" modelAttribute="loginVoluntario">
 					<div class="mb-3 row">
 						<form:label path="email" for="exampleInputEmail2"
-							class="col-sm-3 col-form-label text-left">CORREO:</form:label>
+							class="col-sm-3 col-form-label text-left"> <img src="correoimg.png" alt="Correo" class="icono-correo" />
+						</form:label>
 						<div class="col-sm-9">
 							<form:errors class="text-danger" path="email" />
-							<form:input path="email" type="email" class="form-control"id="email" />
+							<form:input path="email" type="email" class="form-control fondo-verde texto-blanco"id="email" />
 					</div>
 					<div class="mb-3 row">
 						<form:label path="password" for="exampleInputPassword2"
-							class="col-sm-3 col-form-label text-left">CONTRASEÑA:</form:label>
+							class="col-sm-3 col-form-label text-left"><img src="contraimg.png" alt="password" class="icono-contra" /></form:label>
 						<div class="col-sm-9">
 							<form:errors class="text-danger" path="password" />
-							<form:input path="password" type="password" class="form-control"
+							<form:input path="password" type="password" class="form-control fondo-verde texto-blanco"
 								id="password" />
 						</div>
 					</div>
 					<div class="d-flex justify-content-end">
-						<a href="/voluntario" class="btn btn-success custom-btn">Registrarse</a>
+						<a href="/voluntario" class="btn btn-primary custom-btn"> INICIAR SESION</a>
 					</div>
 				</form:form>
 			</div>

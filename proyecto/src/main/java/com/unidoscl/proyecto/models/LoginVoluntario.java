@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class loginVoluntario {
+public class LoginVoluntario {
 
     @NotEmpty(message = "El email es requerido")
 	@Email(message = "Por favor ingrese un email valido")

@@ -114,7 +114,7 @@
 						<div class="col-sm-9">
 							<form:errors class="text-danger" path="password" />
 							<form:input path="password" type="password" class="form-control"
-								id="exampleInputPassword2" />
+								id="password" />
 						</div>
 					</div>
 					<div class="d-flex justify-content-end">

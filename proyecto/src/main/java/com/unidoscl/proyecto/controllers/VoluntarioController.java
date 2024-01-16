@@ -53,7 +53,7 @@ public class VoluntarioController {
     }
 
     @PostMapping("/loginVoluntario")
-    public String login(@Valid @ModelAttribute("login") LoginVoluntario loginvoluntario,
+    public String loginVoluntario(@Valid @ModelAttribute("loginVoluntario") LoginVoluntario loginvoluntario,
             BindingResult resultado, Model modelo, HttpSession sesion) {
 
         if (resultado.hasErrors()) {
