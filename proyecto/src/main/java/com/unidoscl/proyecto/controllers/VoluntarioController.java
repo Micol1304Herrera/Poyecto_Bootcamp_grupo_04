@@ -27,7 +27,7 @@ public class VoluntarioController {
     public String index(@ModelAttribute("newVoluntario") Voluntarios newVoluntario, Model model) {
         System.out.println("y acáaa??????");
 
-        return "formvoluntario.jsp";
+        return "categorias.jsp";
     }
 
     @PostMapping("/v-register")
