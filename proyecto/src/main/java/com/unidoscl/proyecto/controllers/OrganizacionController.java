@@ -1,13 +1,16 @@
 package com.unidoscl.proyecto.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.unidoscl.proyecto.models.LoginOrg;
 import com.unidoscl.proyecto.models.Organizacion;
 import com.unidoscl.proyecto.services.OrganizacionService;
 
@@ -15,66 +18,59 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
+@RequestMapping("/organizacion")
 public class OrganizacionController {
-    private final OrganizacionService orgService;
+    @Autowired
+    private OrganizacionService orgService;
 
-    public OrganizacionController(OrganizacionService orgService) {
-        this.orgService = orgService;
-    }
-
-    @GetMapping("/organizacion")
-    public String index(Model modelo) {
-        modelo.addAttribute("registro", new Organizacion());
-        modelo.addAttribute("login", new LoginOrg());
-
+    @GetMapping("/")
+    public String index(@ModelAttribute("newVoluntario") Organizacion newOrg, Model model) {
+        System.out.println("y acáaa??????");
         return "formorganizacion.jsp";
     }
 
-    @PostMapping("/registerOrganizacion")
-    public String registro(@Valid @ModelAttribute("registro") Organizacion nuevaOrg,
-            BindingResult resultado, Model modelo, HttpSession sesion) {
+    @PostMapping("/org-register")
+    public String register(@Valid @ModelAttribute("newUser") Organizacion newOrg, BindingResult result, HttpSession session, Model model) {
 
-        if (resultado.hasErrors()) {
-            modelo.addAttribute("login", new LoginOrg());
-            return "formorganizacion.jsp";
+        //método en servicio
+        orgService.register(newOrg, result);
 
-        }
-        Organizacion orgRegistrar = orgService.registrarOrg(nuevaOrg, resultado);
+        if(result.hasErrors()) {
 
-        if (orgRegistrar != null) {
-            modelo.addAttribute("login", new LoginOrg());
-            modelo.addAttribute("registro", new Organizacion());
-            modelo.addAttribute("registroExitoso", true);
             return "formorganizacion.jsp";
         } else {
-            modelo.addAttribute("login", new LoginOrg());
-            return "formorganizacion.jsp";
-        }
-    }
-
-    @PostMapping("/loginOrganizacion")
-    public String login(@Valid @ModelAttribute("login") LoginOrg loginorg,
-            BindingResult resultado, Model modelo, HttpSession sesion) {
-
-        if (resultado.hasErrors()) {
-            modelo.addAttribute("registro", new Organizacion());
-            return "formorganizacion.jsp";
-
-        }
-        if (orgService.autenticacionOrg(loginorg.getEmail(), loginorg.getPassword(), resultado)) {
-            Organizacion usuarioLog = orgService.encontrarPorEmail(loginorg.getEmail());
-            sesion.setAttribute("userID", usuarioLog.getId());
-            return "redirect:/perfilOrg";
-        } else {
-            modelo.addAttribute("registro", new Organizacion());
-            return "formorganizacion.jsp";
+            //Guardar sesión
+            session.setAttribute("userInSession", newOrg);
+            return "redirect:/";
         }
 
     }
 
-    @GetMapping("/logoutOrganizacion")
-    public String logout(HttpSession sesion) {
-        sesion.invalidate();
+    @PostMapping("/login-org")
+    public String login(@RequestParam("email") String email, @RequestParam("password") String password, RedirectAttributes redirectAttributes, HttpSession session) {
+
+        //enviar email y contraseña y que el servicio verifique si son correctos
+        Organizacion userLogin = orgService.login(email, password);
+
+        if(userLogin == null) {
+            //Hay error
+            redirectAttributes.addFlashAttribute("error_login", "Email/Password incorrect");
+            return "redirect:/";
+        } else {
+            //Guardamos en sesion
+            session.setAttribute("userInSession", userLogin);
+            return "redirect:/org";
+        }
+    }
+
+    @GetMapping("/logout-org")
+    public String logout(HttpSession session) {
+        session.removeAttribute("userInSession");
         return "redirect:/";
+    }
+
+    @PostMapping("/org")
+    public String ideas(){
+        return "crearvoluntariado.jsp";
     }
 }

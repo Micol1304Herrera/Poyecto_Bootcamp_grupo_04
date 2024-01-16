@@ -1,8 +1,7 @@
 package com.unidoscl.proyecto.services;
 
-import java.util.Optional;
-
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
@@ -12,57 +11,52 @@ import com.unidoscl.proyecto.repositories.VoluntariosRepo;
 @Service
 public class VoluntariosService {
 
-    //INYECCION DE DEPENDENCIAS
-	private final VoluntariosRepo voluntariosRepo;
-	public VoluntariosService(VoluntariosRepo vRepo) {
-		this.voluntariosRepo = vRepo;
-	}
+	@Autowired
+    private VoluntariosRepo voluntariosRepo;
 
-	public Voluntarios encontrarPorEmail(String email) {
-		return voluntariosRepo.findByEmail(email);
-	}
-
-	public Voluntarios encontrarPorId(Long id) {
-		Optional<Voluntarios> voluntario = voluntariosRepo.findById(id);
-		if(voluntario.isPresent()) {
-			return voluntario.get();
-		}
-		return null;
-	}
-
-	//Registrar voluntario
-	public Voluntarios registrarVoluntario(Voluntarios voluntario, BindingResult resultado) {
-        Voluntarios voluntarioRegistrar = voluntariosRepo.findByEmail(voluntario.getEmail());
-
-        if(voluntarioRegistrar != null) {
-            resultado.rejectValue("email", "Matches", "Email already exists");
-        }
-        if(!voluntario.getPassword().equals(voluntario.getPasswordConfirm())) {
-            resultado.rejectValue("password", "Matches", "Password does not match");
-        }
-        if(resultado.hasErrors()) {
-            return null;
-        }
-        String hashed = BCrypt.hashpw(voluntario.getPassword(), BCrypt.gensalt());
-        voluntario.setPassword(hashed);
-        return voluntariosRepo.save(voluntario);
+    public Voluntarios saveVoluntario(Voluntarios u){
+        return voluntariosRepo.save(u);
     }
 
-	// AUTENTICACION DEL USUARIO (LOGIN)
-	public boolean autenticacionVoluntario(String email, String password, BindingResult resultado) {
-		Voluntarios voluntarioRegistrar = voluntariosRepo.findByEmail(email);
+    public Voluntarios findUserById(Long id){
+        return voluntariosRepo.findById(id).orElse(null);
+    }
 
-		if(voluntarioRegistrar == null) {
-			resultado.rejectValue("email", "Matches", "Invalid email");
-			return false;
+    public Voluntarios register(Voluntarios newVoluntario, BindingResult result) {
 
-		}else {
-			if(BCrypt.checkpw(password, voluntarioRegistrar.getPassword())) {
-				return true;
-			}else {
-				resultado.rejectValue("password", "Matches", "Incorrect password");
-				return false;
-			}
-		}
-	}
+        String email = newVoluntario.getEmail();
+        Voluntarios isUser = voluntariosRepo.findByEmail(email); //NULL o Objeto Usuario
+        if(isUser != null) {
+            result.rejectValue("email", "Unique", "The email is already in use");
+        }
+
+        String password = newVoluntario.getPassword();
+        String confirm = newVoluntario.getPasswordConfirm();
+        if(!password.equals(confirm)) { //! -> Lo contrario
+            result.rejectValue("confirm", "Matches", "The passwords don't match");
+        }
+
+        if(result.hasErrors()) {
+            return null;
+        } else {
+            String pass_encript = BCrypt.hashpw(newVoluntario.getPassword(), BCrypt.gensalt());
+            newVoluntario.setPassword(pass_encript);
+            return voluntariosRepo.save(newVoluntario);
+        }
+
+    }
+    public Voluntarios login(String email, String password) {
+
+        Voluntarios userExists = voluntariosRepo.findByEmail(email); //NULL o Objeto de User
+        if(userExists == null) {
+            return null;
+        }
+
+        if(BCrypt.checkpw(password, userExists.getPassword())) {
+            return userExists;
+        } else {
+            return null;
+        }
+
+    }
 }

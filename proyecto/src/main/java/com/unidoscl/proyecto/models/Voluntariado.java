@@ -42,9 +42,6 @@ public class Voluntariado {
 	@NotEmpty(message = "Selecciona un campo")
 	private String region;
 
-	@NotEmpty(message = "Selecciona un campo")
-	private String comuna;
-
 	@NotEmpty(message= "La direccion es obligatoria")
 	private String direccion;
 
