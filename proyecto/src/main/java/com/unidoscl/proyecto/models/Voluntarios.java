@@ -95,5 +95,4 @@ public class Voluntarios {
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
     private Regiones regiones; // Cambié el nombre de la variable para que sea plural
-
 }

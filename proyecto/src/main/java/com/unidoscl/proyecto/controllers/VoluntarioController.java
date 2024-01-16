@@ -27,7 +27,7 @@ public class VoluntarioController {
         modelo.addAttribute("registro", new Voluntarios());
         modelo.addAttribute("login", new LoginVoluntario());
 
-        return "formvoluntario.jsp";
+        return "categorias.jsp";
     }
 
     @PostMapping("/registerVoluntario")
@@ -36,7 +36,7 @@ public class VoluntarioController {
 
         if (resultado.hasErrors()) {
             modelo.addAttribute("login", new LoginVoluntario());
-            return "formvoluntario.jsp";
+            return "categorias.jsp";
 
         }
         Voluntarios registrarVoluntario = voluntariosService.registrarVoluntario(newVoluntario, resultado);
@@ -48,7 +48,7 @@ public class VoluntarioController {
             return "formvoluntario.jsp";
         } else {
             modelo.addAttribute("login", new LoginVoluntario());
-            return "formvoluntario.jsp";
+            return "categorias.jsp";
         }
     }
 
@@ -58,7 +58,7 @@ public class VoluntarioController {
 
         if (resultado.hasErrors()) {
             modelo.addAttribute("registro", new Voluntarios());
-            return "formvoluntario.jsp";
+            return "categorias.jsp";
 
         }
         if (voluntariosService.autenticacionVoluntario(loginvoluntario.getEmail(), loginvoluntario.getPassword(), resultado)) {
@@ -67,15 +67,9 @@ public class VoluntarioController {
             return "redirect:/perfilvoluntario";
         } else {
             modelo.addAttribute("registro", new Voluntarios());
-            return "formvoluntario.jsp";
+            return "categorias.jsp";
         }
 
     }
-
-    @GetMapping("/logoutVoluntario")
-    public String logout(HttpSession sesion) {
-        sesion.invalidate();
-        return "redirect:/";
     }
 
-}

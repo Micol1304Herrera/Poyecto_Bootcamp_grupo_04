@@ -16,8 +16,8 @@
     <div class="container">
 		<div class="row">
 			<!-- Sección de Registro -->
-			<div class="col-md-6">
-				<h2 class="fw-bold display-6">Register</h2>
+			<div class="col-md-6" style="background-color: #acdfae; color: rgb(11, 59, 11);"></div>
+				<h2 class="fw-bold display-6">REGISTRO ORGANIZACION</h2>
 				<form:form action="/register" method="post" modelAttribute="registro">
 					<div class="mb-3 row">
 
@@ -96,7 +96,7 @@
 			</div>
 
 			<!-- Sección de Inicio de Sesión -->
-			<div class="col-md-6">
+			<div class="col-md-6" style="background-color: white; color: rgb(11, 59, 11);">
 				<h2 class="fw-bold display-6 d-flex justify-content-end">Login</h2>
 				<form:form action="/login" method="post" modelAttribute="login">
 					<div class="mb-3 row">

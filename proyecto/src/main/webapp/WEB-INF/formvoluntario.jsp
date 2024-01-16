@@ -22,7 +22,7 @@
     <div class="container">
 		<div class="row">
 			<!-- Sección de Registro -->
-			<div class="col-md-6" style="background-color: #4CAF50; color: rgb(11, 59, 11);">
+			<div class="col-md-6" style="background-color: #acdfae; color: rgb(11, 59, 11);">
 				<h2 class="fw-bold display-6">Registro Voluntarios</h2>
 				<form:form action="/registerVoluntario" method="post" modelAttribute="Voluntarios">
 					<div class="mb-3 row">
@@ -168,6 +168,7 @@
 						<div class="d-flex justify-content-end">
 							<a href="/voluntario" class="btn btn-success custom-btn">Registrarse</a>
 						</div>
+					</c:if>
 						<c:if test="${registroExitoso}">
 							<div class="alert alert-success custom-alert" role="alert">
 								<div class="custom-icon"></div>
@@ -180,7 +181,7 @@
 			<!-- Sección de Inicio de Sesión -->
 			<div class="col-md-6" style="background-color: white; color: rgb(11, 59, 11);">
 				<h2 class="fw-bold display-6 d-flex justify-content-end">Iniciar Sesion</h2>
-				<form:form action="/login" method="post" modelAttribute="login">
+				<form:form action="/loginVoluntario" method="post" modelAttribute="loginVoluntario">
 					<div class="mb-3 row">
 						<form:label path="email" for="exampleInputEmail2"
 							class="col-sm-3 col-form-label text-left">CORREO:</form:label>
