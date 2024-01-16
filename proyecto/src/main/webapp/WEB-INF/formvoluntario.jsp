@@ -1,16 +1,22 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 	<style>
-		  footer {
-            background-color: rgb(11, 59, 11);; 
-            color: white; 
-            padding: 10px; 
+		 .seccion-registro {
+            background-color: #acdfae;
+            color: rgb(11, 59, 11);
+            padding: 20px; 
+		 }
+        .seccion-sesion {
+            background-color: white;
+            color: rgb(11, 59, 11);
+            padding: 20px;
         }
         .custom-btn {
             background-color: rgb(11, 59, 11);
@@ -20,30 +26,37 @@
       margin-bottom: 0;
       border-radius: 0;
       background-color: white;
+	  color: rgb(11, 59, 11);
       font-size: x-large;
       padding-left: 30px;
-     }
+        }
 	 .icono-correo {
 	width: 20px; 
     height: 20px; 
     margin-right: 5px; 
-	 }
+	    }
 	 .icono-contra {
 	width: 20px; 
     height: 20px; 
     margin-right: 5px; 
-	 }
+	    }
 	 .fondo-verde {
 		background-color: rgb(11, 59, 11);
-	 }
+	    }
 	 .texto-blanco {
     color: white; 
-}
+        }
+     footer {
+            background-color: rgb(11, 59, 11);
+            color: white; 
+            padding: 10px; 
+			margin-top: 20px;
+        }
     </style>
     <title>UNIDOSCL</title>
 </head>
 <body>
-	<nav class="navbar navbar " >
+	<nav class="navbar" >
 		<div class="container-fluid">
 		  <div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -69,7 +82,7 @@
     <div class="container">
 		<div class="row">
 			<!-- Sección de Registro -->
-			<div class="col-md-6" style="background-color: #acdfae; color: rgb(11, 59, 11);">
+			<div class="col-md-6 seccion-registro" style="background-color: #acdfae; color: rgb(11, 59, 11);">
 				<h2 class="fw-bold display-6">Registro Voluntarios</h2>
 				<form:form action="/registerVoluntario" method="post" modelAttribute="Voluntarios">
 					<div class="mb-3 row">
@@ -102,26 +115,35 @@
 						<div>
 							<div class="mb-3 row">
 
-								<form:label path="region" for="region"
-									class="col-sm-3 col-form-label text-left">Region:</form:label>
-								<div class="col-sm-9">
-									<form:errors class="text-danger" path="name"/>
-									<form:input path="region" type="text" class="form-control"
-										id="region"/>
+								<div>
+									<select class="form-select form-select-sm" aria-label="Small select">
+										<option selected="">Selecciona la región en donde vives</option>
+										<option value="R1">Región de Arica y Parinacota</option>
+										<option value="R2">Región de Tarapacá</option>
+										<option value="R3">Región de Antofagasta</option>
+										<option value="R4">Región de Atacama</option>
+										<option value="R5">Región de Coquimbo</option>
+										<option value="R6">Región de Valparaíso</option>
+										<option value="R7">Región Metropolitana de Santiago</option>
+										<option value="R8">Región del Libertador General Bernardo O'Higgins</option>
+										<option value="R9">Región del Maule</option>
+										<option value="R10">Región de Ñuble</option>
+										<option value="R11">Región de La Araucanía</option>
+										<option value="R12">Región de Los Ríos</option>
+										<option value="R13">Región de Los Lagos</option>
+										<option value="R14">Región del Biobío</option>
+										<option value="R15">Región de Aysén del General Carlos Ibáñez del Campo</option>
+										<option value="R16">Región de Magallanes y de la Antártica Chilena</option>
+									</select>
 								</div>
-
-						
-								<div class="mb-3 row">
-
-									<form:label path="comuna" for="comuna"
-										class="col-sm-3 col-form-label text-left">Comuna:</form:label>
-									<div class="col-sm-9">
-										<form:errors class="text-danger" path="comuna"/>
-										<form:input path="comuna" type="text" class="form-control"
-											id="comuna"/>
-									</div>
-						</div>
-						<div>
+							</div>
+							<div class="mb-3 row">
+								<form:label path="comuna" for="comuna" class="col-sm-3 col-form-label text-left">Comuna:</form:label>
+								<div class="col-sm-9">
+									<form:errors class="text-danger" path="comuna"/>
+									<form:input path="comuna" type="text" class="form-control" id="comuna"/>
+								</div>
+							</div>
                             <form:label path="edad" for="edad"
                             class="col-sm-3 col-form-label text-left">Edad: </form:label>
                             <div class="col-sm-9">
@@ -157,7 +179,7 @@
 							<form:errors class="text-danger" path="passwordConfirmation" />
 							<form:input path="passwordConfirmation" type="password"
 								class="form-control" id="passwordConfirmation" />
-
+						</div>
 
 					<c:if test="${registroExitoso}">
 						<div class="alert alert-success custom-alert" role="alert">
@@ -167,18 +189,11 @@
 						<div class="d-flex justify-content-end">
 							<a href="/voluntario" class="btn btn-success custom-btn">Registrarse</a>
 						</div>
-					</c:if>
-						<c:if test="${registroExitoso}">
-							<div class="alert alert-success custom-alert" role="alert">
-								<div class="custom-icon"></div>
-								<p>Successful registration.</p>
-							</div>
-					</c:if>
 				</form:form>
 			</div>
 
 			<!-- Sección de Inicio de Sesión -->
-			<div class="col-md-6" style="background-color: white; color: rgb(11, 59, 11);">
+			<div class="col-md-6 seccion-sesion" style="background-color: white; color: rgb(11, 59, 11);">
 				<h2 class="fw-bold display-6 d-flex justify-content-end">Iniciar Sesion</h2>
 				<form:form action="/loginVoluntario" method="post" modelAttribute="loginVoluntario">
 					<div class="mb-3 row">
