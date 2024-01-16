@@ -17,7 +17,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    /* Remove the navbar's default margin-bottom and rounded borders */
     body{
         background-color: #f2ffd3;
     }
@@ -96,7 +96,7 @@
         <li class="active"><a href="">Inicio </a></li>
         <li><a href="#">Foro</a></li>
         <li><a href="#">Comunidad</a></li>
-        <li><a href="#">Cotacto</a></li>
+        <li><a href="#">Contacto</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>

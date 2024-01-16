@@ -19,7 +19,11 @@
 
 				<h2>Registrate</h2>
 
-				<form:label path="name">Name:</form:label>
+				<form:label path="nameOrganizacion">Name:</form:label>
+				<form:input type="text" class="form-control" path="name"/>
+				<form:errors path="name" class="text-danger"/>
+
+				<form:label path="rutEmpresa">Rut empresa:</form:label>
 				<form:input type="text" class="form-control" path="name"/>
 				<form:errors path="name" class="text-danger"/>
 
@@ -41,10 +45,10 @@
 
 		<div class="col-6">
 
-				<h2>Login</h2>
+				<h2>Iniciar Sesion</h2>
 				<p class="text-danger">${error_login}</p>
 
-				<form action="/users/login" method="post">
+				<form action="/login-org" method="post">
 					<div>
 						<label>E-mail</label>
 						<input type="text" class="form-control" name="email" />

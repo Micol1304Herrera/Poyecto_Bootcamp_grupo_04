@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page isErrorPage="true" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -128,16 +126,17 @@
       <div class="col-sm-6"  style=" color: #364908;
       justify-items: stretch;">
         <img id="logo" src="./img/cl-3--unscreen.gif" alt="">
-        <h2 style="font-size:xx-large; color: #364908; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" >Uniendo personas con un objetivo en común</h2>
+        <h2 style="font-size:xx-large; color: #364908; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" >Uniendo personas con un objetivo en comun</h2>
         <br>
-            <p style="font-size: xx-large;" >Nunca dudes de que un pequeño grupo de ciudadanos comprometidos y conscientes puede cambiar el mundo; de hecho, es lo único que siempre lo ha hecho. Margaret Mead</p>
+            <p style="font-size: xx-large;" >Nunca dudes de que un pequeno grupo de ciudadanos comprometidos y conscientes puede cambiar el mundo; de hecho, es lo único que siempre lo ha hecho. Margaret Mead</p>
       </div>
       <div class="col-sm-6"  style="margin-top: 90px;">
-        <a href="/voluntario">
+        <a href="/voluntario/" class="btn btn-green">
             <button class="my-button">Quiero hacer un voluntariado</button>
             </a>
+
             <br>
-            <a href="/organizacion">
+            <a href="/organizacion/">
             <button class="my-button">Ofrezco un voluntariado</button>
             </a>
       </div>

@@ -31,7 +31,6 @@
     <label for="categoria">Categoría de Voluntariado:</label>
     <select id="categoria" name="categoria" required>
         <option value="categoria1">Categoría 1</option>
-        <option value="categoria2">Categoría 2</option>
     </select><br>
 
     <label for="nombreOrganizacion">Nombre de la Organización:</label>

@@ -34,7 +34,7 @@ public class Organizacion {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-    @NotEmpty(message = "")
+    @NotEmpty(message = "el nombre de la organizacion es obligatorio")
 	private String nameOrganizacion;
 
     @NotEmpty(message="")

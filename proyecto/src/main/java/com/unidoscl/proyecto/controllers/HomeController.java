@@ -8,6 +8,6 @@ public class HomeController {
     @GetMapping("/")
     public String raiz(){
         System.out.println("Llegoo");
-        return "inicio.jsp";
+        return "iniciopag.jsp";
     }
 }

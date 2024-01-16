@@ -19,9 +19,20 @@
 
 				<h2>Registrate</h2>
 
-				<form:label path="name">Name:</form:label>
-				<form:input type="text" class="form-control" path="name"/>
-				<form:errors path="name" class="text-danger"/>
+				<form:label path="nameVolunteer">Nombre:</form:label>
+				<form:input type="text" class="form-control" path="nameVolunteer"/>
+				<form:errors path="nameVolunteer" class="text-danger"/>
+
+				<form:label path="region">Region:</form:label>
+					<select class="form-control" path="region">
+						<option value="opcion1">Opcion 1</option>
+					</select>
+				<form:errors path="region" class="text-danger"/>
+
+				<form:label path="edad">Edad:</form:label>
+				<form:input type="number" class="form-control" path="edad"/>
+				<form:errors path="edad" class="text-danger"/>
+
 
 				<form:label path="email">Email:</form:label>
 				<form:input type="text" class="form-control" path="email"/>
@@ -41,10 +52,10 @@
 
 		<div class="col-6">
 
-				<h2>Login</h2>
+				<h2>Iniciar sesion</h2>
 				<p class="text-danger">${error_login}</p>
 
-				<form action="/users/login" method="post">
+				<form action="/login-v" method="post">
 					<div>
 						<label>E-mail</label>
 						<input type="text" class="form-control" name="email" />
