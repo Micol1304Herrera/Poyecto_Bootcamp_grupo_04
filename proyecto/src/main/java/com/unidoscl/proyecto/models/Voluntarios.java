@@ -96,5 +96,4 @@ public class Voluntarios {
     @JoinColumn(name = "region_id")
     private Regiones regiones; // Cambié el nombre de la variable para que sea plural
 
-
 }
