@@ -27,7 +27,7 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name="volunteers")
+@Table(name="voluntarios")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -44,16 +44,20 @@ public class Voluntarios {
 	@NotEmpty(message = "Correo electrónico es requerido!")
 	@Email(message = "Ingresa un email valido")
 	private String apellido;
+	
+	@NotEmpty(message = "")
+	private String rut;
+
+	@NotEmpty(message = "")
+	@Min(16)
+	private String edad; 
+	
 
 	@NotEmpty(message = "")
 	private String region;
 
 	@NotEmpty(message = "")
 	private String comuna;
-
-	@NotEmpty(message="Este campo es requerido")
-	@Min(16)
-	private int edad;
 
 	@NotEmpty(message = "El correo electrónico es requerido!")
 	@Email(message = "Ingresa un email valido")
